@@ -1,5 +1,16 @@
 
 function getPreview() {
+    var selectedTheme = document.getElementById("theme").selectedIndex;
+
+    if (selectedTheme === 1) {
+        renderThemeWithWccgLogo();
+    } else {
+        renderSimpleTheme();
+    }
+    
+}
+
+function renderSimpleTheme() {
     var bibcanvas = document.getElementById("bibcanvas");
     var ctx = bibcanvas.getContext("2d");
     ctx.clearRect(0, 0, bibcanvas.width, bibcanvas.height);
@@ -20,22 +31,78 @@ function getPreview() {
     ctx.fillText(airnumber, bibcanvas.width / 2, 200);
 
     ctx.textAlign="left"; 
+
     ctx.font = "20px Arial";
 
     ctx.fillText("Name", 20, 280);
-    ctx.fillText("Blood Group", 350, 280);
+    ctx.fillText("Blood Group", 370, 280);
+
+    ctx.font = "15px Arial";
     ctx.fillText("Emergency Contact", 20, 310);
-    ctx.fillText("Phone", 350, 310);
+    ctx.fillText("Phone", 370, 310);
 
     ctx.fillStyle = "ORANGERED";
+
+    ctx.font = "20px Arial";
     const ridername = document.getElementById("ridername").value;
     ctx.fillText(ridername, 100, 280);
     const bloodgroup = document.getElementById("bloodgroup").value;
-    ctx.fillText(bloodgroup, 470, 280);
+    ctx.fillText(bloodgroup, 490, 280);
+
+    ctx.font = "15px Arial";
     const emergencycontact = document.getElementById("emergencycontact").value;
-    ctx.fillText(emergencycontact, 200, 310);
+    ctx.fillText(emergencycontact, 170, 310);
     const emergencynumber = document.getElementById("emergencynumber").value;
-    ctx.fillText(emergencynumber, 420, 310);
+    ctx.fillText(emergencynumber, 440, 310);
+}
+
+function renderThemeWithWccgLogo() {
+    var bibcanvas = document.getElementById("bibcanvas");
+    var ctx = bibcanvas.getContext("2d");
+    ctx.clearRect(0, 0, bibcanvas.width, bibcanvas.height);
+
+    ctx.fillStyle = "WHITE";
+    ctx.fillRect(0,0,600,400);
+
+    ctx.fillStyle = "SKYBLUE";
+    ctx.fillRect(20,30,560,200);
+    ctx.fillRect(20,350,560,30);
+
+    var img = document.getElementById("wccglogo");
+    ctx.drawImage(img, 30, 95);
+
+    ctx.fillStyle = "black";
+    ctx.textAlign="center";
+    ctx.font = "bold 15px Arial";
+    ctx.fillText("AIR Number", bibcanvas.width / 2, 50);
+    ctx.font = "bold 170px Times";
+    const airnumber = document.getElementById("airnumber").value;
+    ctx.fillText(airnumber, (bibcanvas.width / 2) + 50, 200);
+
+    ctx.textAlign="left"; 
+
+    ctx.font = "20px Arial";
+
+    ctx.fillText("Name", 20, 280);
+    ctx.fillText("Blood Group", 370, 280);
+
+    ctx.font = "15px Arial";
+    ctx.fillText("Emergency Contact", 20, 310);
+    ctx.fillText("Phone", 370, 310);
+
+    ctx.fillStyle = "ORANGERED";
+
+    ctx.font = "20px Arial";
+    const ridername = document.getElementById("ridername").value;
+    ctx.fillText(ridername, 100, 280);
+    const bloodgroup = document.getElementById("bloodgroup").value;
+    ctx.fillText(bloodgroup, 490, 280);
+
+    ctx.font = "15px Arial";
+    const emergencycontact = document.getElementById("emergencycontact").value;
+    ctx.fillText(emergencycontact, 170, 310);
+    const emergencynumber = document.getElementById("emergencynumber").value;
+    ctx.fillText(emergencynumber, 440, 310);
 }
 
 document.getElementById("preview").addEventListener("click", function(event){

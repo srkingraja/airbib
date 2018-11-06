@@ -43,3 +43,7 @@ canvas {
 #downloadlink {
     visibility: hidden;
 }
+
+.invisible {
+    visibility: hidden;
+}

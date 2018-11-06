@@ -32,8 +32,18 @@
             <label for="emergencynumber">Emergency Number</label>
             <input type="text" id="emergencynumber" name="emergencynumber" placeholder="Emergency Contact Number.." />
 
-            <input type="submit" id="preview" value="Preview">
-            <input type="button" id="download" value="Download">
+            <label for="theme">Theme</label>
+            <select id="theme" name="theme">
+                <option value="simple">Simple</option>
+                <option value="withwccglogo">With WCCG Logo</option>
+            </select>
+
+            <div>
+                <input type="submit" id="preview" value="Preview">
+                <input type="button" id="download" value="Download">
+            </div>
+
+            
 
             <a id="downloadlink" href="" download="airbib.png">Download</a>
 
@@ -42,6 +52,10 @@
     <div class="canvascontainer">
         <canvas id="bibcanvas" width="600" height="400">
         </canvas>
+    </div>
+
+    <div class="invisible">
+        <img id="wccglogo" width="50" height="50" src="images/WccgLogoSmall.jpg" alt="WCCG Logo">
     </div>
 
     <script src="app.js"></script>
