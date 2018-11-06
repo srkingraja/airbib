@@ -1,5 +1,8 @@
+import './style.css';
+import WccgLogo from '../images/WccgLogoSmall.jpg'
+import { isNullOrUndefined } from 'util';
 
-function getPreview() {
+function renderBibCard() {
     var selectedTheme = document.getElementById("theme").selectedIndex;
 
     if (selectedTheme === 1) {
@@ -14,13 +17,13 @@ function renderSimpleTheme() {
     var bibcanvas = document.getElementById("bibcanvas");
     var ctx = bibcanvas.getContext("2d");
 
-    renderBasicTheme(ctx, "bold 200px Arial", bibcanvas.width / 2);
+    renderBasicTheme(ctx, "bold 180px Arial", bibcanvas.width / 2);
 }
 
 function renderThemeWithWccgLogo() {
     var bibcanvas = document.getElementById("bibcanvas");
     var ctx = bibcanvas.getContext("2d");
-    renderBasicTheme(ctx, "bold 170px Arial", (bibcanvas.width / 2) + 50);
+    renderBasicTheme(ctx, "bold 160px Arial", (bibcanvas.width / 2) + 50);
     renderWccgLogo(ctx);
 }
 
@@ -39,7 +42,8 @@ function renderHeaderFooter(ctx) {
     ctx.fillStyle = "WHITE";
     ctx.fillRect(0,0,600,400);
 
-    ctx.fillStyle = "SKYBLUE";
+    const color = document.getElementById("color").value;
+    ctx.fillStyle = color;
     ctx.fillRect(20,30,560,200);
     ctx.fillRect(20,350,560,30);
 
@@ -59,7 +63,7 @@ function renderBody(ctx) {
 
     ctx.font = "15px Arial";
     ctx.fillText("Emergency Contact", 20, 310);
-    ctx.fillText("Phone", 370, 310);
+    ctx.fillText("Emergency Number", 20, 330);
 
     ctx.fillStyle = "ORANGERED";
 
@@ -73,7 +77,7 @@ function renderBody(ctx) {
     const emergencycontact = document.getElementById("emergencycontact").value;
     ctx.fillText(emergencycontact, 170, 310);
     const emergencynumber = document.getElementById("emergencynumber").value;
-    ctx.fillText(emergencynumber, 430, 310);
+    ctx.fillText(emergencynumber, 170, 330);
 }
 
 function renderAirNumber(ctx, font, x) {
@@ -85,24 +89,74 @@ function renderAirNumber(ctx, font, x) {
 }
 
 function renderWccgLogo(ctx) {
-    var img = document.getElementById("wccglogo");
-    ctx.drawImage(img, 30, 95);
+    //var img = document.getElementById("wccglogo");
+    var img = new Image();
+    img.addEventListener('load', onImageLoad);
+    img.src = WccgLogo;
+    
+    function onImageLoad(e) {
+        ctx.drawImage(img, 30, 95);
+    };
 }
 
-document.getElementById("preview").addEventListener("click", function(event){
-    getPreview();
-    event.preventDefault();
-});
+function saveToLocalStorage() {
+    var elem = document.getElementById('mainform').elements;
 
-document.getElementById("download").addEventListener("click", function(event){
-    downloadLink = document.getElementById("downloadlink");
+    for (var i = 0; i < elem.length; i++) {
+        if (elem[i].type === "text" || elem[i].type === "number" || elem[i].type === "color" || elem[i].type === "select-one") {
+            if (elem[i].value !== "") {
+                localStorage.setItem(elem[i].id, elem[i].value);
+            }            
+        }
+    }
+}
+
+function getFromLocalStorage() {
+    var elem = document.getElementById('mainform').elements;
+
+    for (var i = 0; i < elem.length; i++) {
+        if (elem[i].type === "text" || elem[i].type === "number" || elem[i].type === "color" || elem[i].type === "select-one") {
+            setValueIfNotNull(elem[i].id);
+        }
+    }
+}
+
+function setValueIfNotNull(key) {
+    const elem = document.getElementById(key);
+
+    if (!isNullOrUndefined(elem)) {
+        const value = localStorage.getItem(key);
+
+        if (!isNullOrUndefined(value)) {
+            elem.value = value;
+        }
+    }
+}
+
+document.getElementById("apply").onclick = function(event){
+    renderBibCard();
+    saveToLocalStorage();
+    event.preventDefault();
+};
+
+document.getElementById("download").onclick = function(event){
+    const downloadLink = document.getElementById("downloadlink");
     downloadLink.click();
     event.preventDefault();
-});
+};
 
-document.getElementById("downloadlink").addEventListener("click", function(event){
-    getPreview();
+document.getElementById("clear").onclick = function(event){
+    localStorage.clear();
+    window.location.reload();
+    event.preventDefault();
+};
+
+document.getElementById("downloadlink").onclick = function(event){
     var bibcanvas = document.getElementById("bibcanvas");
     var img    = bibcanvas.toDataURL("image/png");
     event.target.href = img;
-});
+};
+
+window.onload  = function(event) {
+    getFromLocalStorage();
+};

@@ -1,0 +1,33 @@
+{
+  "name": "airbib",
+  "version": "1.0.0",
+  "description": "AIR Bib Creator",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wccgunofficial/airbib.git"
+  },
+  "keywords": [
+    "AIR",
+    "BIB"
+  ],
+  "author": "Saju Thankappan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wccgunofficial/airbib/issues"
+  },
+  "homepage": "https://github.com/wccgunofficial/airbib#readme",
+  "devDependencies": {
+    "css-loader": "^1.0.1",
+    "file-loader": "^2.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2"
+  }
+}

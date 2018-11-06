@@ -2,7 +2,7 @@ body {
     font-family: Arial;
 }
 
-input[type=text], select, textarea {
+input[type=text],input[type=number], select, textarea {
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
@@ -11,6 +11,12 @@ input[type=text], select, textarea {
     margin-top: 6px;
     margin-bottom: 16px;
     resize: vertical
+}
+
+input[type=color] {
+    width: 100%;
+    margin-top: 6px;
+    margin-bottom: 16px;
 }
 
 input[type=submit], input[type=button] {
@@ -40,10 +46,10 @@ canvas {
     border:1px solid #000000;
 }
 
-#downloadlink {
+.invisible {
     visibility: hidden;
 }
 
-.invisible {
-    visibility: hidden;
+.small {
+    font-size: small;
 }

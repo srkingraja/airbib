@@ -9,19 +9,17 @@
     <meta name="description" content="AIR Bib Creator">
     <meta name="author" content="Saju Thankappan">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="styles.css?v=1.0">
 </head>
 
 <body>
     <h1>AIR Bib Creator</h1>
     <div class="container">
-        <form>
+        <form id="mainform">
             <label for="ridername">Rider Name</label>
             <input type="text" id="ridername" name="ridername" placeholder="Rider Name.." />
 
             <label for="airnumber">AIR Number</label>
-            <input type="text" id="airnumber" name="airnumber" placeholder="AIR Number.." />
+            <input type="number" id="airnumber" name="airnumber" placeholder="AIR Number.." />
 
             <label for="bloodgroup">Blood Group</label>
             <input type="text" id="bloodgroup" name="bloodgroup" placeholder="Blood Group.." />
@@ -37,15 +35,18 @@
                 <option value="simple">Simple</option>
                 <option value="withwccglogo">With WCCG Logo</option>
             </select>
+            <label for="color">Color</label>
+            <input type="color" id="color" value="#87ceeb" /> 
 
             <div>
-                <input type="submit" id="preview" value="Preview">
+                <input type="submit" id="apply" value="Apply">
                 <input type="button" id="download" value="Download">
+                <input type="button" id="clear" value="Clear">
             </div>
 
-            
+            <div class="small">Note: Please apply changes before downloading.</div>
 
-            <a id="downloadlink" href="" download="airbib.png">Download</a>
+            <a id="downloadlink" class="invisible" href="" download="airbib.png">Download</a>
 
         </form>
     </div>
@@ -54,11 +55,10 @@
         </canvas>
     </div>
 
-    <div class="invisible">
+    <!--div class="invisible">
         <img id="wccglogo" width="50" height="50" src="images/WccgLogoSmall.jpg" alt="WCCG Logo">
-    </div>
+    </div-->
 
-    <script src="app.js"></script>
 </body>
 
 </html>
