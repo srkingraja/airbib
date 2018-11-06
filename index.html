@@ -1,0 +1,50 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>AIR Bib Creator</title>
+    <meta name="description" content="AIR Bib Creator">
+    <meta name="author" content="Saju Thankappan">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="styles.css?v=1.0">
+</head>
+
+<body>
+    <h1>AIR Bib Creator</h1>
+    <div class="container">
+        <form>
+            <label for="ridername">Rider Name</label>
+            <input type="text" id="ridername" name="ridername" placeholder="Rider Name.." />
+
+            <label for="airnumber">AIR Number</label>
+            <input type="text" id="airnumber" name="airnumber" placeholder="AIR Number.." />
+
+            <label for="bloodgroup">Blood Group</label>
+            <input type="text" id="bloodgroup" name="bloodgroup" placeholder="Blood Group.." />
+
+            <label for="emergencycontact">Emergency Contact</label>
+            <input type="text" id="emergencycontact" name="emergencycontact" placeholder="Emergency Contact Name.." />
+
+            <label for="emergencynumber">Emergency Number</label>
+            <input type="text" id="emergencynumber" name="emergencynumber" placeholder="Emergency Contact Number.." />
+
+            <input type="submit" id="preview" value="Preview">
+            <input type="button" id="download" value="Download">
+
+            <a id="downloadlink" href="" download="airbib.png">Download</a>
+
+        </form>
+    </div>
+    <div class="canvascontainer">
+        <canvas id="bibcanvas" width="600" height="400">
+        </canvas>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
