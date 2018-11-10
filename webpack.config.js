@@ -40,8 +40,8 @@ module.exports = {
         name: "AIR BIB Creator",
         short_name: "AIRBIB",
         start_url: "/",
-        background_color: "#8B0000",
-        theme_color: "#8B0000",
+        background_color: "#87ceeb",
+        theme_color: "#87ceeb",
         display: "standalone",
         icons: [
           {
