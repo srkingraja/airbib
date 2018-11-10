@@ -24,6 +24,7 @@
   "homepage": "https://github.com/wccgunofficial/airbib#readme",
   "devDependencies": {
     "clean-webpack-plugin": "^0.1.19",
+    "copy-webpack-plugin": "^4.6.0",
     "css-loader": "^1.0.1",
     "file-loader": "^2.0.0",
     "generate-robotstxt": "^5.0.7",

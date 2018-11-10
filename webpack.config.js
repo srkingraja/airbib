@@ -5,6 +5,7 @@ const RobotstxtPlugin = require("robotstxt-webpack-plugin").default;
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const ManifestPlugin = require("webpack-manifest-plugin");
 const workboxPlugin = require("workbox-webpack-plugin");
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   mode: "production",
@@ -33,14 +34,27 @@ module.exports = {
       favicon: "images/favicon.png"
     }),
     new RobotstxtPlugin({}),
+    new CopyWebpackPlugin([{from:'images',to:'images'}]),
     new ManifestPlugin({
       seed: {
-        name: 'AIR BIB Creator',
-        short_name: 'AIRBIB',
+        name: "AIR BIB Creator",
+        short_name: "AIRBIB",
         start_url: "/",
-        background_color: '#8B0000',
-        theme_color: '#8B0000',
-        display: 'standalone'
+        background_color: "#8B0000",
+        theme_color: "#8B0000",
+        display: "standalone",
+        icons: [
+          {
+            src: "images/favicon-512.png",
+            sizes: "512x512",
+            type: "image/png"
+          },
+          {
+            src: "images/favicon-192.png",
+            sizes: "192x192",
+            type: "image/png"
+          }
+        ]
       }
     }),
     new workboxPlugin.GenerateSW({
