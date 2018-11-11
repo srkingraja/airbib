@@ -37,8 +37,8 @@ module.exports = {
     new CopyWebpackPlugin([{from:'images',to:'images'}]),
     new ManifestPlugin({
       seed: {
-        name: "AIR BIB Creator",
-        short_name: "AIRBIB",
+        name: "AIR Bib Creator",
+        short_name: "AIR Bib",
         start_url: "/",
         background_color: "#87ceeb",
         theme_color: "#87ceeb",
