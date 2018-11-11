@@ -1,138 +1,118 @@
 <!DOCTYPE html>
 
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>AIR Bib Creator</title>
-    <meta name="description" content="AIR Bib Creator" />
-    <meta name="author" content="Saju Thankappan" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#87ceeb" />
-    <link rel="manifest" href="/manifest.json" />
-  </head>
 
-  <body>
-    
-    <div class="topnav">
-      <h1>AIR Bib Creator.</h1>
+<head>
+  <meta charset="utf-8" />
+  <title>AIR Bib Creator</title>
+  <meta name="description" content="AIR Bib Creator" />
+  <meta name="author" content="Saju Thankappan" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#87ceeb" />
+  <link rel="manifest" href="/manifest.json" />
+</head>
+
+<body>
+
+  <div class="topnav">
+    <h1>AIR Bib Creator.</h1>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="formcontainer col-form">
+        <form id="mainform">
+          <div class="row">
+            <div class="col-25"><label for="ridername">Rider Name</label></div>
+            <div class="col-75">
+              <input type="text" id="ridername" name="ridername" placeholder="Rider Name.." />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-25"><label for="airnumber">AIR Number</label></div>
+            <div class="col-75">
+              <input type="number" id="airnumber" name="airnumber" placeholder="AIR Number.." />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-25"><label for="bloodgroup">Blood Group</label></div>
+            <div class="col-75">
+              <input type="text" id="bloodgroup" name="bloodgroup" placeholder="Blood Group.." />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-25">
+              <label for="emergencycontact">Emergency Contact</label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="emergencycontact" name="emergencycontact" placeholder="Emergency Contact Name.." />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-25">
+              <label for="emergencynumber">Emergency Number</label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="emergencynumber" name="emergencynumber" placeholder="Emergency Contact Number.." />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-25"><label for="theme">Theme</label></div>
+            <div class="col-75">
+              <select id="theme" name="theme">
+                <option value="simple">Simple</option>
+                <option value="withwccglogo">With WCCG Logo</option>
+                <option value="withmrlogo">With MR Logo</option>
+                <option value="withwccgmrlogo">With WCCG & MR Logo</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-25"><label for="color">Colors</label></div>
+            <div class="col-75 colors">
+              <div class="colorcol">
+                <label for="color1">BG</label>
+                <input type="color" id="color1" value="#87ceeb" />
+              </div>
+              <div class="colorcol">
+                <label for="color2">AIR#</label>
+                <input type="color" id="color2" value="#8B0000" />
+              </div>
+              <div class="colorcol">
+                <label for="color3">Body</label>
+                <input type="color" id="color3" value="#B22222" />
+              </div>
+              <div class="colorcol">
+                <label for="color4">Label</label>
+                <input type="color" id="color4" value="#000000" />
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <input type="submit" id="apply" value="Apply" />
+              <input type="button" id="download" value="Download" />
+              <input type="button" id="clear" value="Clear" />
+            </div>
+          </div>
+
+          <div class="small">Note: Please apply changes before downloading.</div>
+
+          <a id="downloadlink" class="invisible" href="" download="airbib.png">Download</a>
+        </form>
+      </div>
+      <div class="canvascontainer col-canvas">
+        <canvas id="bibcanvas" width="600" height="400"> </canvas>
+      </div>
     </div>
-    <div class="container">
-      <form id="mainform">
-        <div class="row">
-          <div class="col-25"><label for="ridername">Rider Name</label></div>
-          <div class="col-75">
-            <input
-              type="text"
-              id="ridername"
-              name="ridername"
-              placeholder="Rider Name.."
-            />
-          </div>
-        </div>
+  </div>
+  </div>
+</body>
 
-        <div class="row">
-          <div class="col-25"><label for="airnumber">AIR Number</label></div>
-          <div class="col-75">
-            <input
-              type="number"
-              id="airnumber"
-              name="airnumber"
-              placeholder="AIR Number.."
-            />
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-25"><label for="bloodgroup">Blood Group</label></div>
-          <div class="col-75">
-            <input
-              type="text"
-              id="bloodgroup"
-              name="bloodgroup"
-              placeholder="Blood Group.."
-            />
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-25">
-            <label for="emergencycontact">Emergency Contact</label>
-          </div>
-          <div class="col-75">
-            <input
-              type="text"
-              id="emergencycontact"
-              name="emergencycontact"
-              placeholder="Emergency Contact Name.."
-            />
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-25">
-            <label for="emergencynumber">Emergency Number</label>
-          </div>
-          <div class="col-75">
-            <input
-              type="text"
-              id="emergencynumber"
-              name="emergencynumber"
-              placeholder="Emergency Contact Number.."
-            />
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-25"><label for="theme">Theme</label></div>
-          <div class="col-75">
-            <select id="theme" name="theme">
-              <option value="simple">Simple</option>
-              <option value="withwccglogo">With WCCG Logo</option>
-              <option value="withmrlogo">With MR Logo</option>
-              <option value="withwccgmrlogo">With WCCG & MR Logo</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-25"><label for="color">Colors</label></div>
-          <div class="col-75 colors">
-            <div class="colorcol">
-              <label for="color1">BG</label>
-              <input type="color" id="color1" value="#87ceeb" />
-            </div>
-            <div class="colorcol">
-              <label for="color2">AIR#</label>
-              <input type="color" id="color2" value="#8B0000" />
-            </div>
-            <div class="colorcol">
-              <label for="color3">Body</label>
-              <input type="color" id="color3" value="#B22222" />
-            </div>
-            <div class="colorcol">
-              <label for="color4">Label</label>
-              <input type="color" id="color4" value="#000000" />
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div>
-            <input type="submit" id="apply" value="Apply" />
-            <input type="button" id="download" value="Download" />
-            <input type="button" id="clear" value="Clear" />
-          </div>
-        </div>
-
-        <div class="small">Note: Please apply changes before downloading.</div>
-
-        <a id="downloadlink" class="invisible" href="" download="airbib.png"
-          >Download</a
-        >
-      </form>
-    </div>
-    <div class="canvascontainer">
-      <canvas id="bibcanvas" width="600" height="400"> </canvas>
-    </div>
-  </body>
 </html>
