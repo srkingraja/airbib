@@ -95,11 +95,11 @@ export class BibCardRenderer {
     this.ctx.fillText("Blood Group", 370, 280);
 
     this.ctx.font = "15px Arial";
-    this.ctx.fillText("Emergency Contact", 20, 310);
-    this.ctx.fillText("Emergency Number", 20, 330);
+    this.ctx.fillText("Emergency Contact & Number", 20, 310);
+    //this.ctx.fillText("Emergency Number", 20, 330);
   }
 
-  renderBodyValues(ctx) {
+  renderBodyValues() {
     this.ctx.textAlign = "left";
     this.ctx.fillStyle = this.settings.bodycolor;
 
@@ -110,10 +110,18 @@ export class BibCardRenderer {
     this.ctx.fillText(bloodgroup, 500, 280);
 
     this.ctx.font = "15px Arial";
+    const emergencycontactandnumber = this.getEmergencyContactNameAndNumber();
+    this.ctx.fillText(emergencycontactandnumber, 20, 330);
+    //this.ctx.fillText(emergencynumber, 170, 330);
+  }
+
+  getEmergencyContactNameAndNumber()
+  {
     const emergencycontact = document.getElementById("emergencycontact").value;
-    this.ctx.fillText(emergencycontact, 170, 310);
+    //this.ctx.fillText(emergencycontact, 170, 310);
     const emergencynumber = document.getElementById("emergencynumber").value;
-    this.ctx.fillText(emergencynumber, 170, 330);
+    const emergencycontactandnumber = emergencycontact + "  " + emergencynumber;
+    return emergencycontactandnumber;
   }
 
   renderAirNumber(x, width) {
