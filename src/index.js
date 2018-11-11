@@ -48,13 +48,22 @@ function setValueIfNotNull(key) {
 
 document.getElementById("apply").onclick = function(event) {
   const renderer = new BibCardRenderer();
-  renderer.initialize({
-    bgcolor: document.getElementById("color1").value,
-    airnumbercolor: document.getElementById("color2").value,
-    bodycolor: document.getElementById("color3").value,
-    labelcolor: document.getElementById("color4").value
+  const bibCanvas = document.getElementById("bibcanvas");
+  renderer.initialize(bibCanvas);
+  renderer.renderBibCard({
+    riderName: document.getElementById("ridername").value,
+    airNumber: document.getElementById("airnumber").value,
+    bloodGroup: document.getElementById("bloodgroup").value,
+    emergencyContact: document.getElementById("emergencycontact").value,
+    emergencyNumber: document.getElementById("emergencynumber").value,
+    theme: document.getElementById("theme").selectedIndex,
+    colors: {
+      bgcolor: document.getElementById("color1").value,
+      airnumbercolor: document.getElementById("color2").value,
+      bodycolor: document.getElementById("color3").value,
+      labelcolor: document.getElementById("color4").value
+    }
   });
-  renderer.renderBibCard();
   saveToLocalStorage();
   event.preventDefault();
 };

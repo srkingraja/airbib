@@ -3,24 +3,33 @@ import MRLogo from "../../images/MRLogo.png";
 
 export class BibCardRenderer {
   constructor() {
-    this.settings = {
-      bgcolor: "#87ceeb",
-      airnumbercolor: "#8B0000",
-      bodycolor: "#B22222",
-      labelcolor: "#000000"
+    this.data = {
+      riderName: "",
+      airNumber: "",
+      bloodGroup: "",
+      emergencyContact: "",
+      emergencyNumber: "",
+      theme: 0,
+      colors: {
+        bgcolor: "#87ceeb",
+        airnumbercolor: "#8B0000",
+        bodycolor: "#B22222",
+        labelcolor: "#000000",
+      }
     };
-    this.bibcanvas = document.getElementById("bibcanvas");
+    this.bibcanvas = {};
+    this.ctx = {};
+  }
+
+  initialize(bibCanvas) {
+    this.bibcanvas = bibCanvas;
     this.ctx = bibcanvas.getContext("2d");
   }
 
-  initialize(settings) {
-    this.settings = settings;
-  }
+  renderBibCard(data) {
+    this.data = data;
 
-  renderBibCard() {
-    const selectedTheme = document.getElementById("theme").selectedIndex;
-
-    switch (selectedTheme) {
+    switch (this.data.theme) {
       case 1:
         this.renderThemeWithWccgLogo();
         break;
@@ -70,12 +79,12 @@ export class BibCardRenderer {
     this.ctx.fillStyle = "WHITE";
     this.ctx.fillRect(0, 0, 600, 400);
 
-    const color = this.settings.bgcolor;
+    const color = this.data.colors.bgcolor;
     this.ctx.fillStyle = color;
     this.ctx.fillRect(20, 30, 560, 200);
     this.ctx.fillRect(20, 350, 560, 30);
 
-    this.ctx.fillStyle = this.settings.labelcolor;
+    this.ctx.fillStyle = this.data.colors.labelcolor;
     this.ctx.textAlign = "center";
     this.ctx.font = "bold 15px Arial";
     this.ctx.fillText("AIR Number", bibcanvas.width / 2, 50);
@@ -88,7 +97,7 @@ export class BibCardRenderer {
 
   renderBodyLabels() {
     this.ctx.textAlign = "left";
-    this.ctx.fillStyle = this.settings.labelcolor;
+    this.ctx.fillStyle = this.data.colors.labelcolor;
     this.ctx.font = "20px Arial";
 
     this.ctx.fillText("Name", 20, 280);
@@ -101,12 +110,12 @@ export class BibCardRenderer {
 
   renderBodyValues() {
     this.ctx.textAlign = "left";
-    this.ctx.fillStyle = this.settings.bodycolor;
+    this.ctx.fillStyle = this.data.colors.bodycolor;
 
     this.ctx.font = "20px Arial";
-    const ridername = document.getElementById("ridername").value;
+    const ridername = this.data.riderName;
     this.ctx.fillText(ridername, 90, 280);
-    const bloodgroup = document.getElementById("bloodgroup").value;
+    const bloodgroup = this.data.bloodGroup;
     this.ctx.fillText(bloodgroup, 500, 280);
 
     this.ctx.font = "15px Arial";
@@ -117,22 +126,18 @@ export class BibCardRenderer {
 
   getEmergencyContactNameAndNumber()
   {
-    const emergencycontact = document.getElementById("emergencycontact").value;
-    //this.ctx.fillText(emergencycontact, 170, 310);
-    const emergencynumber = document.getElementById("emergencynumber").value;
-    const emergencycontactandnumber = emergencycontact + "  " + emergencynumber;
+    const emergencycontactandnumber = this.data.emergencyContact + "  " + this.data.emergencyNumber;
     return emergencycontactandnumber;
   }
 
   renderAirNumber(x, width) {
-    const airnumber = document.getElementById("airnumber").value;
-    this.ctx.fillStyle = this.settings.airnumbercolor;
+    this.ctx.fillStyle = this.data.colors.airnumbercolor;
     this.ctx.textAlign = "center";
-    const fontSize = this.getFontHeight(airnumber, width);
+    const fontSize = this.getFontHeight(this.data.airNumber, width);
     this.ctx.font = "bold " + fontSize + "px Arial";
     console.log("Font size is calculated as " + fontSize + " for width " + width);
     let y = 200 - (((200 - fontSize) / 40) * 5) + 5;
-    this.ctx.fillText(airnumber, x, y);
+    this.ctx.fillText(this.data.airNumber, x, y);
   }
 
   getFontHeight(text, allowedWidth) {
