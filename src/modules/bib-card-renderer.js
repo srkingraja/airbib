@@ -81,7 +81,7 @@ export class BibCardRenderer {
 
     const color = this.data.colors.bgcolor;
     this.ctx.fillStyle = color;
-    this.ctx.fillRect(20, 30, 560, 200);
+    this.ctx.fillRect(20, 20, 560, 210);
     this.ctx.fillRect(20, 350, 560, 30);
 
     this.ctx.fillStyle = this.data.colors.labelcolor;
