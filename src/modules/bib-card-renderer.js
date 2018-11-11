@@ -9,7 +9,7 @@ export class BibCardRenderer {
       bloodGroup: "",
       emergencyContact: "",
       emergencyNumber: "",
-      theme: 0,
+      theme: 'simple',
       colors: {
         bgcolor: "#87ceeb",
         airnumbercolor: "#8B0000",
@@ -30,14 +30,20 @@ export class BibCardRenderer {
     this.data = data;
 
     switch (this.data.theme) {
-      case 1:
+      case 'withwccglogo':
         this.renderThemeWithWccgLogo();
         break;
-      case 2:
+      case 'withmrlogo':
         this.renderThemeWithMRLogo();
         break;
-      case 3:
+      case 'withwccgmrlogo':
         this.renderThemeWithWccgAndMRLogo();
+        break;
+      case 'simpleportrait':
+        this.renderSimplePortraitTheme();
+        break;
+      case 'simplesquare':
+        this.renderSimpleSquareTheme();
         break;
       default:
         this.renderSimpleTheme();
@@ -45,21 +51,29 @@ export class BibCardRenderer {
   }
 
   renderSimpleTheme() {
-    this.renderBasicTheme(bibcanvas.width / 2, 560);
+    this.renderBasicTheme(bibcanvas.width / 2, bibcanvas.width - 40);
+  }
+
+  renderSimplePortraitTheme() {
+    this.renderBasicTheme(bibcanvas.width / 2, bibcanvas.width - 40);
+  }
+
+  renderSimpleSquareTheme() {
+    this.renderBasicTheme(bibcanvas.width / 2, bibcanvas.width - 40);
   }
 
   renderThemeWithWccgLogo() {
-    this.renderBasicTheme(bibcanvas.width / 2 + 50, 460);
+    this.renderBasicTheme(bibcanvas.width / 2 + 50, bibcanvas.width - 140);
     this.renderLogo(WccgLogo, 30);
   }
 
   renderThemeWithMRLogo() {
-    this.renderBasicTheme(bibcanvas.width / 2 + 50, 460);
+    this.renderBasicTheme(bibcanvas.width / 2 + 50, bibcanvas.width - 140);
     this.renderLogo(MRLogo, 30);
   }
 
   renderThemeWithWccgAndMRLogo() {
-    this.renderBasicTheme(bibcanvas.width / 2, 360);
+    this.renderBasicTheme(bibcanvas.width / 2, bibcanvas.width - 240);
     this.renderLogo(WccgLogo, 30);
     this.renderLogo(MRLogo, 470);
   }
@@ -75,19 +89,25 @@ export class BibCardRenderer {
     this.ctx.clearRect(0, 0, this.bibcanvas.width, this.bibcanvas.height);
   }
 
-  renderHeaderFooter(ctx) {
+  renderHeaderFooter() {
     this.ctx.fillStyle = "WHITE";
-    this.ctx.fillRect(0, 0, 600, 400);
+    this.ctx.fillRect(0, 0, this.bibcanvas.width, this.bibcanvas.height);
 
     const color = this.data.colors.bgcolor;
     this.ctx.fillStyle = color;
-    this.ctx.fillRect(20, 20, 560, 210);
-    this.ctx.fillRect(20, 350, 560, 30);
+
+    const headerHeight = this.isLandscapeMode() ? 210 : 200;
+    this.ctx.fillRect(20, 20, this.bibcanvas.width - 40, headerHeight);
+    this.ctx.fillRect(20, 350, this.bibcanvas.width- 40, 30);
 
     this.ctx.fillStyle = this.data.colors.labelcolor;
     this.ctx.textAlign = "center";
     this.ctx.font = "bold 15px Arial";
     this.ctx.fillText("AIR Number", bibcanvas.width / 2, 50);
+  }
+
+  isLandscapeMode() {
+    return this.bibcanvas.width == 600;
   }
 
   renderBody() {
@@ -100,8 +120,12 @@ export class BibCardRenderer {
     this.ctx.fillStyle = this.data.colors.labelcolor;
     this.ctx.font = "20px Arial";
 
-    this.ctx.fillText("Name", 20, 280);
-    this.ctx.fillText("Blood Group", 370, 280);
+    const nameLabelY = this.isLandscapeMode() ? 280 : 260;
+    this.ctx.fillText("Name", 20, nameLabelY);
+    const bloodGroupLabelX = this.isLandscapeMode() ? 370 : 20;
+    const bloodGroupLabelY = this.isLandscapeMode() ? 280 : 285;
+    
+    this.ctx.fillText("Blood Group", bloodGroupLabelX, bloodGroupLabelY);
 
     this.ctx.font = "15px Arial";
     this.ctx.fillText("Emergency Contact & Number", 20, 310);
@@ -114,9 +138,13 @@ export class BibCardRenderer {
 
     this.ctx.font = "20px Arial";
     const ridername = this.data.riderName;
-    this.ctx.fillText(ridername, 90, 280);
+    const nameX = this.isLandscapeMode() ? 90 : 90;
+    const nameY = this.isLandscapeMode() ? 280 : 260;
+    this.ctx.fillText(ridername, nameX, nameY);
     const bloodgroup = this.data.bloodGroup;
-    this.ctx.fillText(bloodgroup, 500, 280);
+    const bloodGroupX = this.isLandscapeMode() ? 500 : 150;
+    const bloodGroupY = this.isLandscapeMode() ? 280 : 285;
+    this.ctx.fillText(bloodgroup, bloodGroupX, bloodGroupY);
 
     this.ctx.font = "15px Arial";
     const emergencycontactandnumber = this.getEmergencyContactNameAndNumber();

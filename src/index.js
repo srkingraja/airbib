@@ -46,9 +46,31 @@ function setValueIfNotNull(key) {
   }
 }
 
+function initializeCanvas() {
+  const bibCanvas = document.getElementById("bibcanvas");
+  
+  const theme = document.getElementById("theme").value;
+  switch (theme){
+      case 'simpleportrait':
+        bibcanvas.width = 300;
+        bibCanvas.height = 400;
+        break;
+      case 'simplesquare':
+        bibcanvas.width = 400;
+        bibCanvas.height = 400;
+        break;
+      default:
+        bibcanvas.width = 600;
+        bibCanvas.height = 400;
+  }
+
+  return bibcanvas;
+}
+
 document.getElementById("apply").onclick = function(event) {
   const renderer = new BibCardRenderer();
-  const bibCanvas = document.getElementById("bibcanvas");
+  const bibCanvas = initializeCanvas();
+
   renderer.initialize(bibCanvas);
   renderer.renderBibCard({
     riderName: document.getElementById("ridername").value,
@@ -56,7 +78,7 @@ document.getElementById("apply").onclick = function(event) {
     bloodGroup: document.getElementById("bloodgroup").value,
     emergencyContact: document.getElementById("emergencycontact").value,
     emergencyNumber: document.getElementById("emergencynumber").value,
-    theme: document.getElementById("theme").selectedIndex,
+    theme: document.getElementById("theme").value,
     colors: {
       bgcolor: document.getElementById("color1").value,
       airnumbercolor: document.getElementById("color2").value,
