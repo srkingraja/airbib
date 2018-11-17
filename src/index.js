@@ -49,8 +49,8 @@ function setValueIfNotNull(key) {
 function initializeCanvas() {
   const bibCanvas = document.getElementById("bibcanvas");
   
-  const theme = document.getElementById("theme").value;
-  switch (theme){
+  const design = document.getElementById("design").value;
+  switch (design){
       case 'simpleportrait':
         bibcanvas.width = 300;
         bibCanvas.height = 400;
@@ -78,7 +78,7 @@ document.getElementById("apply").onclick = function(event) {
     bloodGroup: document.getElementById("bloodgroup").value,
     emergencyContact: document.getElementById("emergencycontact").value,
     emergencyNumber: document.getElementById("emergencynumber").value,
-    theme: document.getElementById("theme").value,
+    design: document.getElementById("design").value,
     colors: {
       bgcolor: document.getElementById("color1").value,
       airnumbercolor: document.getElementById("color2").value,
