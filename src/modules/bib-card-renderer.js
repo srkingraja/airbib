@@ -9,7 +9,7 @@ export class BibCardRenderer {
       bloodGroup: "",
       emergencyContact: "",
       emergencyNumber: "",
-      theme: 'simple',
+      design: 'simple',
       colors: {
         bgcolor: "#87ceeb",
         airnumbercolor: "#8B0000",
@@ -29,56 +29,56 @@ export class BibCardRenderer {
   renderBibCard(data) {
     this.data = data;
 
-    switch (this.data.theme) {
+    switch (this.data.design) {
       case 'withwccglogo':
-        this.renderThemeWithWccgLogo();
+        this.renderDesignWithWccgLogo();
         break;
       case 'withmrlogo':
-        this.renderThemeWithMRLogo();
+        this.renderDesignWithMRLogo();
         break;
       case 'withwccgmrlogo':
-        this.renderThemeWithWccgAndMRLogo();
+        this.renderDesignWithWccgAndMRLogo();
         break;
       case 'simpleportrait':
-        this.renderSimplePortraitTheme();
+        this.renderSimplePortraitDesign();
         break;
       case 'simplesquare':
-        this.renderSimpleSquareTheme();
+        this.renderSimpleSquareDesign();
         break;
       default:
-        this.renderSimpleTheme();
+        this.renderSimpleDesign();
     }
   }
 
-  renderSimpleTheme() {
-    this.renderBasicTheme(bibcanvas.width / 2, bibcanvas.width - 40);
+  renderSimpleDesign() {
+    this.renderBasicDesign(bibcanvas.width / 2, bibcanvas.width - 40);
   }
 
-  renderSimplePortraitTheme() {
-    this.renderBasicTheme(bibcanvas.width / 2, bibcanvas.width - 40);
+  renderSimplePortraitDesign() {
+    this.renderBasicDesign(bibcanvas.width / 2, bibcanvas.width - 40);
   }
 
-  renderSimpleSquareTheme() {
-    this.renderBasicTheme(bibcanvas.width / 2, bibcanvas.width - 40);
+  renderSimpleSquareDesign() {
+    this.renderBasicDesign(bibcanvas.width / 2, bibcanvas.width - 40);
   }
 
-  renderThemeWithWccgLogo() {
-    this.renderBasicTheme(bibcanvas.width / 2 + 50, bibcanvas.width - 140);
+  renderDesignWithWccgLogo() {
+    this.renderBasicDesign(bibcanvas.width / 2 + 50, bibcanvas.width - 140);
     this.renderLogo(WccgLogo, 30);
   }
 
-  renderThemeWithMRLogo() {
-    this.renderBasicTheme(bibcanvas.width / 2 + 50, bibcanvas.width - 140);
+  renderDesignWithMRLogo() {
+    this.renderBasicDesign(bibcanvas.width / 2 + 50, bibcanvas.width - 140);
     this.renderLogo(MRLogo, 30);
   }
 
-  renderThemeWithWccgAndMRLogo() {
-    this.renderBasicTheme(bibcanvas.width / 2, bibcanvas.width - 240);
+  renderDesignWithWccgAndMRLogo() {
+    this.renderBasicDesign(bibcanvas.width / 2, bibcanvas.width - 240);
     this.renderLogo(WccgLogo, 30);
     this.renderLogo(MRLogo, 470);
   }
 
-  renderBasicTheme(airnumberx, airnumberwidth) {
+  renderBasicDesign(airnumberx, airnumberwidth) {
     this.clearCanvas();
     this.renderHeaderFooter();
     this.renderAirNumber(airnumberx, airnumberwidth);
